@@ -1,20 +1,20 @@
+
 grammar DataModel;
 
 start 			: datamodel;
 datamodel 		: value;
-value			: object | array | TEXT;
+value			: object | array | TEXT | encapsulated;
 object			: '<' keyvalue (',' keyvalue)* '>';
 
 keyvalue		: KEY '->' value;
-/*keyvalue		: KEY '->' TEXT;*/
-/* KEY 			: [a-z]+ | [A-Z]+ | ["]+; */
 KEY 			: '"' ([a-z]+ | [A-Z]+)+ '"';
 array			: '[' value  (',' value)* ']';
 TEXT			: [a-z]+ | [A-Z]+ | [0-9]+ | [:.'/\\"]+;
+/*STRING			: (~[0-9])+;*/
+/*NUM				: [0-9]+;*/
+encapsulated		: '"' TEXT '"';
 
-WS 				: [ \t\r\n]+ -> skip;
-
-
+WS 			: [ \t\r\n]+ -> skip;
 
 
 
